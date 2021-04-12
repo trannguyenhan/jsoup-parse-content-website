@@ -28,8 +28,23 @@ public class ParseWebsite {
 		Elements elements;
 //		Elements elementsTmp;
 		
-		elements = document.getElementsByTag("p");
-		elements.forEach(e -> listElements.add(e));
+//		elements = document.getElementsByTag("h1");
+//		elements.forEach(e -> listElements.add(e));
+//		
+//		elements = document.getElementsByTag("h2");
+//		elements.forEach(e -> listElements.add(e));
+//		
+//		elements = document.getElementsByTag("h3");
+//		elements.forEach(e -> listElements.add(e));
+//		
+//		elements = document.getElementsByTag("h4");
+//		elements.forEach(e -> listElements.add(e));
+//		
+//		elements = document.getElementsByTag("h5");
+//		elements.forEach(e -> listElements.add(e));
+//		
+//		elements = document.getElementsByTag("h6");
+//		elements.forEach(e -> listElements.add(e));
 		
 		elements = document.getElementsByTag("div");
 		for(Element e : elements) {
@@ -49,22 +64,7 @@ public class ParseWebsite {
 			listElements.add(e);
 		}
 		
-		elements = document.getElementsByTag("h1");
-		elements.forEach(e -> listElements.add(e));
-		
-		elements = document.getElementsByTag("h2");
-		elements.forEach(e -> listElements.add(e));
-		
-		elements = document.getElementsByTag("h3");
-		elements.forEach(e -> listElements.add(e));
-		
-		elements = document.getElementsByTag("h4");
-		elements.forEach(e -> listElements.add(e));
-		
-		elements = document.getElementsByTag("h5");
-		elements.forEach(e -> listElements.add(e));
-		
-		elements = document.getElementsByTag("h6");
+		elements = document.getElementsByTag("p");
 		elements.forEach(e -> listElements.add(e));
 		
 		elements = document.getElementsByTag("a");
