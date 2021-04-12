@@ -96,8 +96,18 @@ public class ParseElement {
 		
 		String newText = text.substring(start, last+1);
 		newText = newText.replace("<br>", "");
-//		newText = newText.replace("\n", "");
 		
+		while(newText.contains("  ")) {
+			newText = newText.replace("  ", " ");
+		}
+		
+		while(newText.contains("\n ")) {
+			newText = newText.replace("\n ", "\n");
+		}
+		
+		while(newText.contains("\n\n")) {
+			newText = newText.replace("\n\n", "\n");
+		}
 		return newText;
 	}
 	
