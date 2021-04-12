@@ -46,6 +46,9 @@ public class ParseWebsite {
 //		elements = document.getElementsByTag("h6");
 //		elements.forEach(e -> listElements.add(e));
 		
+		elements = document.getElementsByTag("li");
+		elements.forEach(e -> listElements.add(e));
+		
 		elements = document.getElementsByTag("div");
 		for(Element e : elements) {
 //			elementsTmp = e.getElementsByTag("div");

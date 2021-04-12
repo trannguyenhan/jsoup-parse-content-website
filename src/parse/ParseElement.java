@@ -66,7 +66,11 @@ public class ParseElement {
 	 * return true if html only text, for example : text here
 	 * */
 	public boolean checkHtmlChildNode(String text) {
-		if(text.contains("</") || text.contains("<img") || text.contains("<input") || text.contains("<!--")) {
+		if(text.contains("</") 
+				|| text.contains("<img") 
+				|| text.contains("<input") 
+				|| text.contains("<!--") 
+				|| text.contains("/>")) {
 			return false;
 		}
 		
