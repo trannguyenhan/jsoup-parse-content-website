@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
@@ -131,11 +130,5 @@ public class ParseElement {
 	
 	public void setElement(Element element) {
 		this.root = element;
-	}
-	
-	public static void main(String[] args) {
-		String html = "<h1>Hello World</h1>";
-		Node document = Jsoup.parse(html).childNode(0);
-		System.out.println(document.nodeName());
 	}
 }
