@@ -26,27 +26,24 @@ public class ParseWebsite {
 
 	private void buildContent() {
 		Elements elements;
-//		Elements elementsTmp;
 		
 		elements = document.getElementsByTag("div");
 		for(Element e : elements) {
-//			elementsTmp = e.getElementsByTag("div");
-//			if(elementsTmp.size() == 0) {
-//				listElements.add(e);
-//			}
 			listElements.add(e);
 		}
 		
 		elements = document.getElementsByTag("span");
 		for(Element e : elements) {
-//			elementsTmp = e.getElementsByTag("div");
-//			if(elementsTmp.size() == 0) {
-//				listElements.add(e);
-//			}
 			listElements.add(e);
 		}
 		
 		elements = document.getElementsByTag("p");
+		elements.forEach(e -> listElements.add(e));
+		
+		elements = document.getElementsByTag("article");
+		elements.forEach(e -> listElements.add(e));
+		
+		elements = document.getElementsByTag("blockquote");
 		elements.forEach(e -> listElements.add(e));
 		
 //		elements = document.getElementsByTag("a");
