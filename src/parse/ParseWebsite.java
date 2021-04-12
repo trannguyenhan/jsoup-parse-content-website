@@ -34,7 +34,9 @@ public class ParseWebsite {
 //			if(elementsTmp.size() == 0) {
 //				listElements.add(e);
 //			}
-			listElements.add(e);
+			if(e.className() != "footer") {
+				listElements.add(e);
+			}
 		}
 		
 		elements = document.getElementsByTag("span");
@@ -85,6 +87,16 @@ public class ParseWebsite {
 //				System.out.println(text + "\n---------------\n");
 //			}
 //		}
+		
+		List<Element> listTmpElement = new ArrayList<Element>();
+		for(Element e : listElements) {
+			if(checkBody(e)) {
+				listTmpElement.add(e);
+			}
+		}
+		
+		listElements.clear();
+		listElements.addAll(listTmpElement);
 	}
 	
 	public String getTitle() {
@@ -94,4 +106,19 @@ public class ParseWebsite {
 	public List<Element> getListElements() {
 		return listElements;
 	}	
+	
+	/*Del footer and header*/
+	public boolean checkBody(Element element) {
+		Element p = element;
+		while(p.nodeName() != "html") {
+			p = element.parent();
+			if(p.nodeName() == "footer" || p.nodeName() == "head") {
+				return false;
+			}
+			
+			element = element.parent();
+		}
+		
+		return true;
+	}
 }
