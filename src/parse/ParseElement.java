@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
@@ -32,9 +33,10 @@ public class ParseElement {
 		
 		for(Node node : listChildNodes) {
 			String text = node.outerHtml();
-			if(checkHtmlChildNode(text)) {
+			if(checkHtmlChildNode(text) || node.nodeName() == "b" || node.nodeName() == "strong") {
 				listContent.add(text);
 			}
+			
 		}
 		
 		String content = "";
@@ -80,6 +82,15 @@ public class ParseElement {
 	/* Normalize strings, remove space, enter beginning and end of line
 	 * */
 	public String normalize(String text) {
+		// remove <strong> tag, <b> tag
+		text = text.replace("<strong>", "");
+		text = text.replace("</strong>", "");
+		text = text.replace("<b>", "");
+		text = text.replace("</b>", "");
+		
+		// remove rag <br>
+		text = text.replace("<br>", "");
+		
 		int lens = text.length();
 		
 		int start = 0;
@@ -99,10 +110,7 @@ public class ParseElement {
 		}
 		
 		String newText = text.substring(start, last+1);
-		
-		// remove rag <br>
-		newText = newText.replace("<br>", "");
-		
+
 		// remove space if duplicate
 		while(newText.contains("  ")) {
 			newText = newText.replace("  ", " ");
@@ -117,11 +125,17 @@ public class ParseElement {
 		while(newText.contains("\n\n")) {
 			newText = newText.replace("\n\n", "\n");
 		}
-		
+	
 		return newText;
 	}
 	
 	public void setElement(Element element) {
 		this.root = element;
+	}
+	
+	public static void main(String[] args) {
+		String html = "<h1>Hello World</h1>";
+		Node document = Jsoup.parse(html).childNode(0);
+		System.out.println(document.nodeName());
 	}
 }
