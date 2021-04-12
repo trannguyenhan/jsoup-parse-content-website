@@ -11,7 +11,7 @@ import elements.TextBlock;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
-		String url = "https://sohagame.vn/tin-tuc/vuong-than-mobile-vote-app-5-sao-nhan-qua-cuc-wow-26436.html";
+		String url = "https://kenh14.vn/cap-bao-mot-thanh-vien-cot-can-cua-running-man-ban-viet-can-nhac-thay-the-vi-muon-banh-truong-20210409155850973.chn";
 		ParseWebsite parse = new ParseWebsite(url);
 		List<Element> listElement = parse.getListElements();
 		TextDocument document = new TextDocument(listElement);
