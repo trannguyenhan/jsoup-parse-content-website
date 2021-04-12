@@ -6,7 +6,6 @@ For example, we extraction content website https://tiki.vn/muong-xao-dandihome-i
 <br /><br />
 **and here is my result** : 
 ```
-Giá sản phẩm trên Tiki đã bao gồm thuế theo luật hiện hành. Tuy nhiên tuỳ vào từng loại sản phẩm hoặc phương thức, địa chỉ giao hàng mà có thể phát sinh thêm chi phí khác như phí vận chuyển, phụ phí hàng cồng kềnh, ...
 Muỗng xào đa năng DandiHome sử dụng chất liệu Inox 304 để làm cán và lõi bên trong.
 Phần muỗng sử dụng chất liệu Silicon loại để sản xuất núm ti giả trẻ em: chịu nhiệt độ lên đến 200 độ, không thôi nhiễm vào thực phẩm khi đun nấu, không lo biến dạng, nứt bể.
 An toàn với chảo chống dính, không là xước nồi.
@@ -16,7 +15,5 @@ Kích thước: 34 x 10 cm
 Khối lượng: 115gr
 
 Muỗng xào DandiHome Inox 304 kết hợp bề mặt muỗng silicon cao cấp - chịu được nhiệt độ cao, an toàn với chảo chống dính
-Muỗng xào DandiHome Inox 304 kết hợp bề mặt muỗng silicon cao cấp - chịu được nhiệt độ cao, an toàn với chảo chống dính
-Thông tin chi tiết
-MÔ TẢ SẢN PHẨM
+Giá sản phẩm trên Tiki đã bao gồm thuế theo luật hiện hành. Tuy nhiên tuỳ vào từng loại sản phẩm hoặc phương thức, địa chỉ giao hàng mà có thể phát sinh thêm chi phí khác như phí vận chuyển, phụ phí hàng cồng kềnh, ...
 ```
