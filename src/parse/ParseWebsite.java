@@ -34,9 +34,7 @@ public class ParseWebsite {
 //			if(elementsTmp.size() == 0) {
 //				listElements.add(e);
 //			}
-			if(e.className() != "footer") {
-				listElements.add(e);
-			}
+			listElements.add(e);
 		}
 		
 		elements = document.getElementsByTag("span");
@@ -112,7 +110,7 @@ public class ParseWebsite {
 		Element p = element;
 		while(p.nodeName() != "html") {
 			p = element.parent();
-			if(p.nodeName() == "footer" || p.nodeName() == "head") {
+			if(p.nodeName() == "footer" || p.nodeName() == "head" || p.className().contains("footer")) {
 				return false;
 			}
 			
