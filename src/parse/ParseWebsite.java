@@ -18,7 +18,7 @@ public class ParseWebsite {
 	}
 
 	public ParseWebsite(String url) throws IOException {
-		document = Jsoup.connect(url).get();
+		document = Jsoup.connect(url).ignoreHttpErrors(true).get();
 		listElements = new ArrayList<Element>();
 		
 		buildContent();

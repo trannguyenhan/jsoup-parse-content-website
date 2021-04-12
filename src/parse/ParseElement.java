@@ -66,7 +66,7 @@ public class ParseElement {
 	 * return true if html only text, for example : text here
 	 * */
 	public boolean checkHtmlChildNode(String text) {
-		if(text.contains("</") || text.contains("<img") || text.contains("<input")) {
+		if(text.contains("</") || text.contains("<img") || text.contains("<input") || text.contains("<!--")) {
 			return false;
 		}
 		
@@ -95,6 +95,8 @@ public class ParseElement {
 		}
 		
 		String newText = text.substring(start, last+1);
+		newText = newText.replace("<br>", "");
+//		newText = newText.replace("\n", "");
 		
 		return newText;
 	}
