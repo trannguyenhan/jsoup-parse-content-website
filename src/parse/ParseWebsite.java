@@ -67,8 +67,8 @@ public class ParseWebsite {
 		elements = document.getElementsByTag("p");
 		elements.forEach(e -> listElements.add(e));
 		
-		elements = document.getElementsByTag("a");
-		elements.forEach(e -> listElements.add(e));
+//		elements = document.getElementsByTag("a");
+//		elements.forEach(e -> listElements.add(e));
 		
 //		ParseElement parseElement = new ParseElement();
 //		for (Element es : listElements) {

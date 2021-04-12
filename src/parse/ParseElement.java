@@ -95,19 +95,25 @@ public class ParseElement {
 		}
 		
 		String newText = text.substring(start, last+1);
+		
+		// remove rag <br>
 		newText = newText.replace("<br>", "");
 		
+		// remove space if duplicate
 		while(newText.contains("  ")) {
 			newText = newText.replace("  ", " ");
 		}
 		
+		// remove space after \n
 		while(newText.contains("\n ")) {
 			newText = newText.replace("\n ", "\n");
 		}
 		
+		// remove \n if duplicate
 		while(newText.contains("\n\n")) {
 			newText = newText.replace("\n\n", "\n");
 		}
+		
 		return newText;
 	}
 	

@@ -47,10 +47,10 @@ public class TextDocument {
 				nextBlock = listTextBlocks.get(i+1);
 			}
 
-//			boolean curIsContent = algorithm.process(preBlock, curBlock, nextBlock);
-			boolean curIsContent1 = algorithm1.process(preBlock, curBlock, nextBlock);
-			boolean curIsContent2 = algorithm2.process(preBlock, curBlock, nextBlock);
-			curBlock.setContent(curIsContent1 | curIsContent2);
+			boolean curIsContent = algorithm1.process(preBlock, curBlock, nextBlock)
+					| algorithm2.process(preBlock, curBlock, nextBlock);
+			
+			curBlock.setContent(curIsContent);
 
 			// next block
 			i++;

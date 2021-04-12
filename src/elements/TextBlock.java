@@ -51,6 +51,8 @@ public class TextBlock {
 		String anchorText = parseElement.getAnchorTextInTag();
 		numWordsInAnchorText = buildNumWords(anchorText);
 		linkDensity = (double) numWordsInAnchorText / (numWords + numWordsInAnchorText);
+		
+		numWords += numWordsInAnchorText;
 	}
 	
 	/* initialization numWords
