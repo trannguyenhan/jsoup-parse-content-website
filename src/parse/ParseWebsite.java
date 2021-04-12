@@ -28,31 +28,6 @@ public class ParseWebsite {
 		Elements elements;
 //		Elements elementsTmp;
 		
-//		elements = document.getElementsByTag("h1");
-//		elements.forEach(e -> listElements.add(e));
-//		
-//		elements = document.getElementsByTag("h2");
-//		elements.forEach(e -> listElements.add(e));
-//		
-//		elements = document.getElementsByTag("h3");
-//		elements.forEach(e -> listElements.add(e));
-//		
-//		elements = document.getElementsByTag("h4");
-//		elements.forEach(e -> listElements.add(e));
-//		
-//		elements = document.getElementsByTag("h5");
-//		elements.forEach(e -> listElements.add(e));
-//		
-//		elements = document.getElementsByTag("h6");
-//		elements.forEach(e -> listElements.add(e));
-		
-		elements = document.getElementsByTag("li");
-		elements.forEach(e -> {
-			if(e.parent().parent().tagName() != "td") { // first parent is ul or ol tag, second parent can is tag td
-				listElements.add(e);
-			}
-		});
-		
 		elements = document.getElementsByTag("div");
 		for(Element e : elements) {
 //			elementsTmp = e.getElementsByTag("div");
@@ -75,6 +50,31 @@ public class ParseWebsite {
 		elements.forEach(e -> listElements.add(e));
 		
 //		elements = document.getElementsByTag("a");
+//		elements.forEach(e -> listElements.add(e));
+		
+		elements = document.getElementsByTag("li");
+		elements.forEach(e -> {
+			if(e.parent().parent().tagName() != "td") { // first parent is ul or ol tag, second parent can is tag td
+				listElements.add(e);
+			}
+		});
+		
+//		elements = document.getElementsByTag("h1");
+//		elements.forEach(e -> listElements.add(e));
+//		
+//		elements = document.getElementsByTag("h2");
+//		elements.forEach(e -> listElements.add(e));
+//		
+//		elements = document.getElementsByTag("h3");
+//		elements.forEach(e -> listElements.add(e));
+//		
+//		elements = document.getElementsByTag("h4");
+//		elements.forEach(e -> listElements.add(e));
+//		
+//		elements = document.getElementsByTag("h5");
+//		elements.forEach(e -> listElements.add(e));
+//		
+//		elements = document.getElementsByTag("h6");
 //		elements.forEach(e -> listElements.add(e));
 		
 //		ParseElement parseElement = new ParseElement();

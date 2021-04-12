@@ -32,7 +32,11 @@ public class ParseElement {
 		
 		for(Node node : listChildNodes) {
 			String text = node.outerHtml();
-			if(checkHtmlChildNode(text) || node.nodeName() == "b" || node.nodeName() == "strong") {
+			if(checkHtmlChildNode(text) 
+					|| node.nodeName() == "b" 
+					|| node.nodeName() == "strong"
+					|| node.nodeName() == "mark"
+					|| node.nodeName() == "em") {
 				listContent.add(text);
 			}
 			
@@ -86,6 +90,10 @@ public class ParseElement {
 		text = text.replace("</strong>", "");
 		text = text.replace("<b>", "");
 		text = text.replace("</b>", "");
+		text = text.replace("<mark>", "");
+		text = text.replace("</mark>", "");
+		text = text.replace("<em>", "");
+		text = text.replace("</em>", "");
 		
 		// remove rag <br>
 		text = text.replace("<br>", "");
