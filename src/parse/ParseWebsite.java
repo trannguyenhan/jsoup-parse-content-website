@@ -47,7 +47,11 @@ public class ParseWebsite {
 //		elements.forEach(e -> listElements.add(e));
 		
 		elements = document.getElementsByTag("li");
-		elements.forEach(e -> listElements.add(e));
+		elements.forEach(e -> {
+			if(e.parent().parent().tagName() != "td") { // first parent is ul or ol tag, second parent can is tag td
+				listElements.add(e);
+			}
+		});
 		
 		elements = document.getElementsByTag("div");
 		for(Element e : elements) {
