@@ -1,10 +1,12 @@
 package algorithms;
 
-import elements.TextBlock;
-
-public class DensitometricClassifier implements ClassifierAlgorithms {	
+public class DensitometricClassifier extends ClassifierAlgorithms {	
 	@Override
-	public boolean process(TextBlock preBlock, TextBlock curBlock, TextBlock nextBlock) {
+	public boolean process() {
+		if(!checkText()) {
+			return false;
+		}
+		
 		double curLinkDensity = curBlock.getLinkDensity();
 		double prevLinkDensity = preBlock.getLinkDensity();
 		double nextTextDensity = nextBlock.getTextDensity();

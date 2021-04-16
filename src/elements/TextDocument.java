@@ -47,8 +47,10 @@ public class TextDocument {
 				nextBlock = listTextBlocks.get(i+1);
 			}
 
+			// predict Block, is content? with some algorithms and heuristic
 			boolean curIsContent = algorithm1.process(preBlock, curBlock, nextBlock)
-					| algorithm2.process(preBlock, curBlock, nextBlock);
+					| algorithm2.process(preBlock, curBlock, nextBlock)
+					| curBlock.getElement().tagName().contains("table");
 			
 			curBlock.setContent(curIsContent);
 

@@ -1,37 +1,13 @@
 package demo;
 
 import java.io.IOException;
-import java.util.List;
 
-import org.jsoup.nodes.Element;
-
-import elements.TextDocument;
-import parse.ParseWebsite;
-import elements.TextBlock;
+import demo.ui.Show;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
-		String url = "http://f319.com/threads/phan-tich-co-ban-back-to-basic-kinh-nghiem-thuong-truong.31472/";
-		ParseWebsite parse = new ParseWebsite(url);
-		List<Element> listElement = parse.getListElements();
-		TextDocument document = new TextDocument(listElement);
-		List<TextBlock> listTextBlock = document.getListTextBlocks();
-
-		int cnt = 0;
-		for(TextBlock t : listTextBlock) {
-			if(t.isContent()) {
-				System.out.println(t.getText());
-//				System.out.println(t.getText());
-				cnt++;
-			}
-//			System.out.println(t.getText());
-		}		
-		
-		printResult(cnt, listTextBlock.size());
-	}
-	
-	public static void printResult(int content, int total) {
-		System.out.println("\n ------------------------------------\n| content / total (Block) = " + content + " / " + total + " |");
-		System.out.println(" ------------------------------------");
+		//String url = "https://tiki.vn/muong-xao-dandihome-inox-304-ket-hop-be-mat-muong-silicon-cao-cap-chiu-duoc-nhiet-do-cao-an-toan-voi-chao-chong-dinh-p68607055.html";
+		String url = "https://bonbanh.com/xe-hyundai-tucson-2.0-at-2021-3466706";
+		Show.run(url);
 	}
 }

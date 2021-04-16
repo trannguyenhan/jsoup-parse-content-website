@@ -1,9 +1,13 @@
 package elements;
 
+import java.io.IOException;
 import java.util.List;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
+import org.jsoup.select.Elements;
 
 import parse.ParseElement;
 
@@ -18,6 +22,8 @@ public class TextBlock {
 	private double textDensity;
 	private double linkDensity;
 
+	private ParseElement parseElement;
+	
 	/* Constructor and 2 attribute below only use initialization configuration start and end of TextBlock
 	 * */
 	public static final TextBlock START_BLOCK = new TextBlock(0, 0, 0, 0);
@@ -35,6 +41,7 @@ public class TextBlock {
 	public TextBlock(Element element) {
 		this.element = element;
 		isContent = false;
+		parseElement = new ParseElement(element);
 		
 		buildBlock();
 	}
@@ -42,10 +49,10 @@ public class TextBlock {
 	/* Build any parameter in block with html, call by constructor
 	 * */
 	private void buildBlock() {
-		ParseElement parseElement = new ParseElement(element);
 		text = parseElement.getTextInTag();
-		numWords = buildNumWords(text);
-		numTags = buildNumTags();
+		
+		numWords = countChar(element);
+		numTags = countTags(element);
 		textDensity = (double) numWords / numTags;
 		
 		String anchorText = parseElement.getAnchorTextInTag();
@@ -60,13 +67,20 @@ public class TextBlock {
 		numWords += numWordsInAnchorText;
 	}
 	
-	/* initialization numWords
+
+	
+	/* initialization number of word in tag
 	 * */
-	private int buildNumWords(String text) {
+	public int countChar(Element node) {
+		//String text = node.text();
+		return buildNumWords(parseElement.getTextInTag());
+	}
+	
+	public int buildNumWords(String text) {
 		int lens = text.length();
 		int cnt = 0;
 		for(int i=0; i<lens; i++) {
-			if(text.charAt(i) == ' ') {
+			if(text.charAt(i) == ' ' || text.charAt(i) == '\n') {
 				cnt++;
 			}
 		}
@@ -76,10 +90,9 @@ public class TextBlock {
 	
 	/* initialization numTags
 	 * */
-	private int buildNumTags() {
-		List<Node> listChildNodes = element.childNodes();
-		
-		return listChildNodes.size() + 1;
+	public int countTags(Element node) {
+		Elements allElements = node.getAllElements();
+		return allElements.size();
 	}
 
 	/* getter
@@ -148,5 +161,11 @@ public class TextBlock {
 
 	public void setLinkDensity(double linkDensity) {
 		this.linkDensity = linkDensity;
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Document document = Jsoup.connect("https://taoviet.vn/demelan/").get();
+		Elements elements = document.getAllElements();
+		System.out.println(elements.size());
 	}
 }

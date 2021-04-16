@@ -14,16 +14,23 @@ public class ParseWebsite {
 	private List<Element> listElements;
 	
 	public ParseWebsite() throws IOException {
-		this("https://tiki.vn/dien-thoai-bphone-3-pro-hang-chinh-hang-p68521343.html?spid=68521347");
+		this("https://tiki.vn/dien-thoai-bphone-3-pro-hang-chinh-hang-p68521343.html");
 	}
 
 	public ParseWebsite(String url) throws IOException {
 		document = Jsoup.connect(url).ignoreHttpErrors(true).get();
 		listElements = new ArrayList<Element>();
 		
-		buildContent();
+		boolean isAll = true;
+		if(isAll) {
+			buildAllContent();
+		} else {
+			buildContent();
+		}		
 	}
 
+	/* Build content with some tag, some tag cann't content such as : div, span, p, li, td, article
+	 * */
 	private void buildContent() {
 		Elements elements;
 		
@@ -46,42 +53,12 @@ public class ParseWebsite {
 		elements = document.getElementsByTag("blockquote");
 		elements.forEach(e -> listElements.add(e));
 		
-//		elements = document.getElementsByTag("a");
-//		elements.forEach(e -> listElements.add(e));
-		
 		elements = document.getElementsByTag("li");
 		elements.forEach(e -> {
 			if(e.parent().parent().tagName() != "td") { // first parent is ul or ol tag, second parent can is tag td
 				listElements.add(e);
 			}
 		});
-		
-//		elements = document.getElementsByTag("h1");
-//		elements.forEach(e -> listElements.add(e));
-//		
-//		elements = document.getElementsByTag("h2");
-//		elements.forEach(e -> listElements.add(e));
-//		
-//		elements = document.getElementsByTag("h3");
-//		elements.forEach(e -> listElements.add(e));
-//		
-//		elements = document.getElementsByTag("h4");
-//		elements.forEach(e -> listElements.add(e));
-//		
-//		elements = document.getElementsByTag("h5");
-//		elements.forEach(e -> listElements.add(e));
-//		
-//		elements = document.getElementsByTag("h6");
-//		elements.forEach(e -> listElements.add(e));
-		
-//		ParseElement parseElement = new ParseElement();
-//		for (Element es : listElements) {
-//			parseElement.setElement(es);
-//			String text = parseElement.getTextInTag();
-//			if(text != "") {
-//				System.out.println(text + "\n---------------\n");
-//			}
-//		}
 		
 		List<Element> listTmpElement = new ArrayList<Element>();
 		for(Element e : listElements) {
@@ -94,26 +71,73 @@ public class ParseWebsite {
 		listElements.addAll(listTmpElement);
 	}
 	
+	/* Build content with all element with all tag in DOM
+	 * */
+	private void buildAllContent() {
+		List<Element> listTmpElements = new ArrayList<Element>();
+		Elements elements = document.getAllElements();
+		for(Element e : elements) {
+			listTmpElements.add(e);
+		}
+		
+		for(Element e : listTmpElements) {
+			if(checkBody(e)) {
+				listElements.add(e);
+			}
+		}
+	}
+	
+	/* Return title web site
+	 * */
 	public String getTitle() {
 		return "\"title\" : " + "\"" + document.title() + "\"";
 	}
-
-	public List<Element> getListElements() {
-		return listElements;
-	}	
 	
-	/*Del footer and header*/
+	/*Delete footer and header*/
 	public boolean checkBody(Element element) {
-		Element p = element;
-		while(p.nodeName() != "html") {
-			p = element.parent();
-			if(p.nodeName() == "footer" || p.nodeName() == "head" || p.className().contains("footer")) {
+		if(element == null) {
+			return false;
+		} else {
+			if(element.tagName().toLowerCase().equals("a")) {
 				return false;
 			}
-			
+		}
+		
+		if(element.parent() != null) {
+			if(element.parent().tagName().toLowerCase().equals("a")){
+				return false;
+			}
+		}
+		
+		if(element.tagName().toLowerCase().contains("script")
+				|| element.tagName().toLowerCase().contains("style")
+				|| element.className().toLowerCase().contains("info")
+				|| element.className().toLowerCase().contains("contact")
+				|| element.className().toLowerCase().contains("title")
+				|| element.tagName().toLowerCase().contains("button")
+				|| (element.tagName().toLowerCase().contains("input") 
+					&& (element.attr("type").toLowerCase().contains("submit")
+							|| element.attr("type").toLowerCase().contains("reset")))) {
+			return false;
+		}
+		
+		while(element.nodeName() != "html") {
+			if(element.nodeName().contains("footer") 
+					|| element.nodeName().toLowerCase().contains("head") 
+					|| element.className().toLowerCase().contains("footer")){
+				return false;
+			}
+				
 			element = element.parent();
+			if(element == null) {
+				return true;
+			}
 		}
 		
 		return true;
 	}
+	
+	public List<Element> getListElements() {
+		return listElements;
+	}	
 }

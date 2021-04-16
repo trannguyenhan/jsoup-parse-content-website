@@ -9,7 +9,7 @@ import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
 public class ParseElement {
-	private Element root;
+	public Element root;
 	private String tag;
 	
 	public ParseElement(Element root) {
@@ -18,7 +18,7 @@ public class ParseElement {
 	}
 	
 	public ParseElement() {
-		String html = "<h1>This is a Heading<p>This is a paragraph.</p><a href=\"/b\">Xin chao</a></h1>";
+		String html = "<h1>This is a Heading<p>This is a paragraph.</p><a>Xin chao<h2>Hello<h3><h4></h4>Blo</h3></h2></a></h1>";
 		root = Jsoup.parse(html).getElementsByTag("h1").get(0);
 		tag = root.tagName();
 	}
@@ -27,16 +27,24 @@ public class ParseElement {
 	 * for example : <body>Hello <p>World</p></body>, method return "Hello", not return "Hello World"
 	 * */
 	public String getTextInTag() {
+		if(root.tagName().contains("table")) {
+			return textInTableTag();
+		}
+		
 		List<Node> listChildNodes = root.childNodes();
 		List<String> listContent = new ArrayList<String>();
 		
 		for(Node node : listChildNodes) {
 			String text = node.outerHtml();
 			if(checkHtmlChildNode(text) 
-					|| node.nodeName() == "b" 
-					|| node.nodeName() == "strong"
-					|| node.nodeName() == "mark"
-					|| node.nodeName() == "em") {
+					|| node.nodeName().equals("b") 
+					|| node.nodeName().equals("mark")
+					|| node.nodeName().equals("em")
+					|| node.nodeName().equals("a")) {
+				if(node.nodeName().equals("a")) {
+					text = Jsoup.parse(node.outerHtml()).getElementsByTag(node.nodeName()).text();
+				}
+				
 				listContent.add(text);
 			}
 			
@@ -51,11 +59,61 @@ public class ParseElement {
 		return content;
 	}
 	
+	/* With table tag, little but condensed information, and harder to work with than other cards
+	 * So, We write a separate function to get information from the table tag
+	 * */
+	private String textInTableTag() {
+		String content = "";
+		Elements elementstr = root.getElementsByTag("tr");
+		for(Element etr : elementstr) {
+			Elements elementstd = etr.getElementsByTag("td");
+			for(Element etd : elementstd) {
+				content += " " + etd.text();
+			}
+		}
+		
+		return content;
+	}
+	
 	/* method return anchor text in owner tag
 	 * it is every text in tag a (tag link)
 	 * */
 	public String getAnchorTextInTag() {
-		Elements elementsATag = root.getElementsByTag("a");
+		List<Element> elementsATag = new ArrayList<Element>();
+		Element rootSibling;
+		
+		// get a tag in previous element
+		rootSibling = root.previousElementSibling();
+		if(rootSibling != null) {
+			if(rootSibling.tagName().contains("a")) {
+				elementsATag.add(rootSibling);
+			} else {
+				if(rootSibling != null) {
+					rootSibling.getElementsByTag("a").forEach(e -> {
+						elementsATag.add(e);
+					});
+				}
+			}
+		}
+		
+		// get a tag in current element
+		root.getElementsByTag("a").forEach(e -> {
+			elementsATag.add(e);
+		});
+		
+		// get a tag in next element
+		rootSibling = root.nextElementSibling();
+		if(rootSibling != null) {
+			if(rootSibling.tagName().contains("a")) {
+				elementsATag.add(rootSibling);
+			} else {
+				rootSibling.getElementsByTag("a").forEach(e -> {
+					elementsATag.add(e);
+				});
+			}
+		}
+		
+
 		
 		String textATag = "";
 		for(Element e : elementsATag) {
@@ -74,8 +132,7 @@ public class ParseElement {
 		if(text.contains("</") 
 				|| text.contains("<img") 
 				|| text.contains("<input") 
-				|| text.contains("<!--") 
-				|| text.contains("/>")) {
+				|| text.contains("<!--")) {
 			return false;
 		}
 		
@@ -94,7 +151,8 @@ public class ParseElement {
 		text = text.replace("</mark>", "");
 		text = text.replace("<em>", "");
 		text = text.replace("</em>", "");
-		
+		text = text.replace("</a>", "");
+	
 		// remove rag <br>
 		text = text.replace("<br>", "");
 		
@@ -139,4 +197,8 @@ public class ParseElement {
 	public void setElement(Element element) {
 		this.root = element;
 	}
+
+	public String getTag() {
+		return tag;
+	}	
 }
