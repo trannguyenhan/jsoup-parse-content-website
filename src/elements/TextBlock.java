@@ -1,12 +1,6 @@
 package elements;
 
-import java.io.IOException;
-import java.util.List;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
 import parse.ParseElement;
@@ -61,7 +55,7 @@ public class TextBlock {
 		if(numWords == 0) {
 			linkDensity = 0;
 		} else {
-			linkDensity = (double) numWordsInAnchorText / (numWords + numWordsInAnchorText);
+			linkDensity = (double) 2.5 * numWordsInAnchorText / (numWords);
 		}
 		
 		numWords += numWordsInAnchorText;
@@ -161,11 +155,5 @@ public class TextBlock {
 
 	public void setLinkDensity(double linkDensity) {
 		this.linkDensity = linkDensity;
-	}
-	
-	public static void main(String[] args) throws IOException {
-		Document document = Jsoup.connect("https://taoviet.vn/demelan/").get();
-		Elements elements = document.getAllElements();
-		System.out.println(elements.size());
 	}
 }

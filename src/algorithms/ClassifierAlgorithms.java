@@ -26,7 +26,7 @@ public class ClassifierAlgorithms implements IClassifierAlgorithms{
 	protected boolean checkText() {
 		String text = curBlock.getText();
 		int ctext = curBlock.buildNumWords(text);
-		if(ctext < 4) return false;
+		if(ctext < 3) return false;
 		
 		return true;
 	}

@@ -22,9 +22,11 @@ public class Show {
 		for(TextBlock t : listTextBlock) {
 			if(t.isContent()) {
 				System.out.println(t.getText());
+				//System.out.println("\n----------\n");
 				cnt++;
 			}
-
+			//System.out.println(t.getText());
+			//System.out.println("\n----------------\n");
 		}		
 		Show.printResult(cnt, listTextBlock.size());
 	}

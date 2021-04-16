@@ -40,6 +40,7 @@ public class ParseElement {
 					|| node.nodeName().equals("b") 
 					|| node.nodeName().equals("mark")
 					|| node.nodeName().equals("em")
+					|| node.nodeName().equals("sub")
 					|| node.nodeName().equals("a")) {
 				if(node.nodeName().equals("a")) {
 					text = Jsoup.parse(node.outerHtml()).getElementsByTag(node.nodeName()).text();
@@ -152,7 +153,10 @@ public class ParseElement {
 		text = text.replace("<em>", "");
 		text = text.replace("</em>", "");
 		text = text.replace("</a>", "");
-	
+		text = text.replace("<sub>", "");
+		text = text.replace("</sub>", "");
+		text = text.replace("<hr>", "");
+		
 		// remove rag <br>
 		text = text.replace("<br>", "");
 		
