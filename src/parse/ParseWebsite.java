@@ -21,54 +21,7 @@ public class ParseWebsite {
 		document = Jsoup.connect(url).ignoreHttpErrors(true).get();
 		listElements = new ArrayList<Element>();
 		
-		boolean isAll = true;
-		if(isAll) {
-			buildAllContent();
-		} else {
-			buildContent();
-		}		
-	}
-
-	/* Build content with some tag, some tag cann't content such as : div, span, p, li, td, article
-	 * */
-	private void buildContent() {
-		Elements elements;
-		
-		elements = document.getElementsByTag("div");
-		for(Element e : elements) {
-			listElements.add(e);
-		}
-		
-		elements = document.getElementsByTag("span");
-		for(Element e : elements) {
-			listElements.add(e);
-		}
-		
-		elements = document.getElementsByTag("p");
-		elements.forEach(e -> listElements.add(e));
-		
-		elements = document.getElementsByTag("article");
-		elements.forEach(e -> listElements.add(e));
-		
-		elements = document.getElementsByTag("blockquote");
-		elements.forEach(e -> listElements.add(e));
-		
-		elements = document.getElementsByTag("li");
-		elements.forEach(e -> {
-			if(e.parent().parent().tagName() != "td") { // first parent is ul or ol tag, second parent can is tag td
-				listElements.add(e);
-			}
-		});
-		
-		List<Element> listTmpElement = new ArrayList<Element>();
-		for(Element e : listElements) {
-			if(checkBody(e)) {
-				listTmpElement.add(e);
-			}
-		}
-		
-		listElements.clear();
-		listElements.addAll(listTmpElement);
+		buildAllContent();	
 	}
 	
 	/* Build content with all element with all tag in DOM
