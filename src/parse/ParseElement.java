@@ -8,16 +8,23 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
+import parse.support.TextNormalize;
+
 public class ParseElement {
-	public Element root;
+	private TextNormalize textNormalize;
+	private Element root;
 	private String tag;
 	
 	public ParseElement(Element root) {
-		this.root = root;
-		tag = this.root.tagName();
+		if(root != null) {
+			this.root = root;
+			tag = this.root.tagName();
+		}
+		textNormalize = new TextNormalize();
 	}
 	
 	public ParseElement() {
+		this(null);
 		String html = "<h1>This is a Heading<p>This is a paragraph.</p><a>Xin chao<h2>Hello<h3><h4></h4>Blo</h3></h2></a></h1>";
 		root = Jsoup.parse(html).getElementsByTag("h1").get(0);
 		tag = root.tagName();
@@ -62,7 +69,7 @@ public class ParseElement {
 			content = content + "\n" + s;
 		}
 		
-		content = normalize(content);
+		content = textNormalize.normalize(content);
 		return content;
 	}
 	
@@ -121,7 +128,7 @@ public class ParseElement {
 //		System.out.println(getTextInTag());
 //		System.out.println(textATag + "\n-----------------\n");
 		
-		textATag = normalize(textATag);
+		textATag = textNormalize.normalize(textATag);
 		return textATag;
 	}
 	
@@ -137,76 +144,6 @@ public class ParseElement {
 		}
 		
 		return true;
-	}
-	
-	/* Normalize strings, remove space, enter beginning and end of line
-	 * */
-	public String normalize(String text) {
-		// remove <strong> tag, <b> tag
-		text = text.replace("<strong>", "");
-		text = text.replace("</strong>", "");
-		text = text.replace("<b>", "");
-		text = text.replace("</b>", "");
-		text = text.replace("<mark>", "");
-		text = text.replace("</mark>", "");
-		text = text.replace("<em>", "");
-		text = text.replace("</em>", "");
-		text = text.replace("</a>", "");
-		text = text.replace("<sub>", "");
-		text = text.replace("</sub>", "");
-		text = text.replace("<hr>", "");
-		text = text.replace("<h1>", "");
-		text = text.replace("</h1>", "");
-		text = text.replace("<h2>", "");
-		text = text.replace("</h2>", "");
-		text = text.replace("<h3>", "");
-		text = text.replace("</h3>", "");
-		text = text.replace("<h4>", "");
-		text = text.replace("</h4>", "");
-		text = text.replace("<h5>", "");
-		text = text.replace("</h5>", "");
-		text = text.replace("<h6>", "");
-		text = text.replace("</h6>", "");
-		
-		// remove rag <br>
-		text = text.replace("<br>", "");
-		
-		int lens = text.length();
-		
-		int start = 0;
-		for(int i=0; i<lens; i++) { // find start
-			if(text.charAt(i) != ' ' && text.charAt(i) != '\n') {
-				start = i;
-				break;
-			}
-		}
-		
-		int last = lens - 1;
-		for(int i=lens-1; i>=0; i--) { // fine end
-			if(text.charAt(i) != ' ' && text.charAt(i) != '\n') {
-				last = i;
-				break;
-			}
-		}
-		
-		String newText = text.substring(start, last+1);
-
-		// remove space if duplicate
-		while(newText.contains("  ")) {
-			newText = newText.replace("  ", " ");
-		}
-		
-		// remove space after \n
-		while(newText.contains("\n ")) {
-			newText = newText.replace("\n ", "\n");
-		}
-		
-		// remove \n if duplicate
-		while(newText.contains("\n\n")) {
-			newText = newText.replace("\n\n", "\n");
-		}
-	
-		return newText;
 	}
 	
 	public void setElement(Element element) {
