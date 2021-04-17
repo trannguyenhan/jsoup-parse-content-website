@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.jsoup.nodes.Element;
 
-import algorithms.ClassifierAlgorithms;
-import algorithms.DensitometricClassifier;
-import algorithms.NumberOfWordsAlgorithms;
+import algorithms.classifier.ClassifierAlgorithms;
+import algorithms.classifier.DensitometricClassifier;
+import algorithms.classifier.NumberOfWordsAlgorithms;
 
 public class TextDocument {
 	List<TextBlock> listTextBlocks;

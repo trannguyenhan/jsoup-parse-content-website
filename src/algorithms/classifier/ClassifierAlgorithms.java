@@ -1,5 +1,6 @@
-package algorithms;
+package algorithms.classifier;
 
+import algorithms.IClassifierAlgorithms;
 import elements.TextBlock;
 
 public class ClassifierAlgorithms implements IClassifierAlgorithms{

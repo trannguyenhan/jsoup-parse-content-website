@@ -1,4 +1,4 @@
-package algorithms;
+package algorithms.classifier;
 
 public class NumberOfWordsAlgorithms extends ClassifierAlgorithms {
 	@Override

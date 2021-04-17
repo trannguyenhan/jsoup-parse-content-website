@@ -55,7 +55,7 @@ public class TextBlock {
 		if(numWords == 0) {
 			linkDensity = 0;
 		} else {
-			linkDensity = (double) 2.5 * numWordsInAnchorText / (numWords);
+			linkDensity = (double) numWordsInAnchorText / (numWords);
 		}
 		
 		numWords += numWordsInAnchorText;

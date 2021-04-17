@@ -1,4 +1,4 @@
-package algorithms;
+package algorithms.classifier;
 
 public class DensitometricClassifier extends ClassifierAlgorithms {	
 	@Override

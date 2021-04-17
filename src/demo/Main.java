@@ -12,7 +12,8 @@ public class Main {
 //		String url = "https://tiki.vn/bo-noi-chao-chong-dinh-baby-elmich-el-1167-2351167-p637936.html";
 //		String url = "https://taoviet.vn/demelan/";
 //		String url = "https://ctt-daotao.hust.edu.vn/DisplayWeb/DisplayBaiViet?baiviet=38096";
-		String url = "https://en.wikipedia.org/wiki/Ball_tree";
+//		String url = "https://en.wikipedia.org/wiki/Ball_tree";
+		String url = "https://viblo.asia/p/chay-mot-file-jar-tren-hadoop-ByEZkaX25Q0";
 		Show.run(url);
 	}
 }
