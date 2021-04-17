@@ -13,9 +13,9 @@ public class NumberOfWordsAlgorithms extends ClassifierAlgorithms {
 		int nextWords = nextBlock.getNumWords();
 		int preWords = preBlock.getNumWords();
 		
-		System.out.println(curBlock.getText());
-		System.out.println(curLinkDensity);
-		System.out.println("\n----------\n");
+//		System.out.println(curBlock.getText());
+//		System.out.println(curLinkDensity);
+//		System.out.println("\n----------\n");
 		
 		if (curLinkDensity <= 0.333333) {
 			if (prevLinkDensity <= 0.555556) {

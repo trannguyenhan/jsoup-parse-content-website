@@ -41,7 +41,13 @@ public class ParseElement {
 					|| node.nodeName().equals("mark")
 					|| node.nodeName().equals("em")
 					|| node.nodeName().equals("sub")
-					|| node.nodeName().equals("a")) {
+					|| node.nodeName().equals("a")
+					|| node.nodeName().equals("h1")
+					|| node.nodeName().equals("h2")
+					|| node.nodeName().equals("h3")
+					|| node.nodeName().equals("h4")
+					|| node.nodeName().equals("h5")
+					|| node.nodeName().equals("h6")) {
 				if(node.nodeName().equals("a")) {
 					text = Jsoup.parse(node.outerHtml()).getElementsByTag(node.nodeName()).text();
 				}
@@ -88,18 +94,14 @@ public class ParseElement {
 		if(rootSibling != null) {
 			if(rootSibling.tagName().contains("a")) {
 				elementsATag.add(rootSibling);
-			} else {
-				if(rootSibling != null) {
-					rootSibling.getElementsByTag("a").forEach(e -> {
-						elementsATag.add(e);
-					});
-				}
-			}
+			} 
 		}
 		
 		// get a tag in current element
-		root.getElementsByTag("a").forEach(e -> {
-			elementsATag.add(e);
+		root.children().forEach(e -> {
+			if(e.tagName().equals("a")) {
+				elementsATag.add(e);
+			}
 		});
 		
 		// get a tag in next element
@@ -107,20 +109,17 @@ public class ParseElement {
 		if(rootSibling != null) {
 			if(rootSibling.tagName().contains("a")) {
 				elementsATag.add(rootSibling);
-			} else {
-				rootSibling.getElementsByTag("a").forEach(e -> {
-					elementsATag.add(e);
-				});
-			}
+			} 
 		}
-		
-
 		
 		String textATag = "";
 		for(Element e : elementsATag) {
 			String text = e.text();
 			textATag = textATag + "\n" + text;
 		}
+		
+//		System.out.println(getTextInTag());
+//		System.out.println(textATag + "\n-----------------\n");
 		
 		textATag = normalize(textATag);
 		return textATag;
@@ -156,6 +155,18 @@ public class ParseElement {
 		text = text.replace("<sub>", "");
 		text = text.replace("</sub>", "");
 		text = text.replace("<hr>", "");
+		text = text.replace("<h1>", "");
+		text = text.replace("</h1>", "");
+		text = text.replace("<h2>", "");
+		text = text.replace("</h2>", "");
+		text = text.replace("<h3>", "");
+		text = text.replace("</h3>", "");
+		text = text.replace("<h4>", "");
+		text = text.replace("</h4>", "");
+		text = text.replace("<h5>", "");
+		text = text.replace("</h5>", "");
+		text = text.replace("<h6>", "");
+		text = text.replace("</h6>", "");
 		
 		// remove rag <br>
 		text = text.replace("<br>", "");

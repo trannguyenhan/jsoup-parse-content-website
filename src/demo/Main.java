@@ -11,7 +11,8 @@ public class Main {
 //		String url = "http://f319.com/threads/phan-tich-co-ban-back-to-basic-kinh-nghiem-thuong-truong.31472/";
 //		String url = "https://tiki.vn/bo-noi-chao-chong-dinh-baby-elmich-el-1167-2351167-p637936.html";
 //		String url = "https://taoviet.vn/demelan/";
-		String url = "https://ctt-daotao.hust.edu.vn/DisplayWeb/DisplayBaiViet?baiviet=38096";
+//		String url = "https://ctt-daotao.hust.edu.vn/DisplayWeb/DisplayBaiViet?baiviet=38096";
+		String url = "https://en.wikipedia.org/wiki/Ball_tree";
 		Show.run(url);
 	}
 }
