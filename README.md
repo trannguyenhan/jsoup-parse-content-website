@@ -2,15 +2,20 @@
 Parse website and content extraction with jsoup <br />
 
 ---
-## See the improved versions of the project at: [trannguyenhan/jsoup-parse-content-website](https://gitlab.com/trannguyenhan/jsoup-parse-content-website) <br />
-(improved project to crawl about bot blocking websites using selenium and headless browsers) <br />
+## See the improved versions of the project at: [trannguyenhan/jsoup-parse-content-website](https://gitlab.com/trannguyenhan/jsoup-parse-content-website)
+
+(improved project to crawl about bot blocking websites using selenium and headless browsers)
 
 ---
 Project inspired by 2 articles [https://dl.acm.org/doi/10.1145/2009916.2009952](https://dl.acm.org/doi/10.1145/2009916.2009952) and [https://dl.acm.org/doi/10.1145/1718487.1718542](https://dl.acm.org/doi/10.1145/1718487.1718542)
-<br />
-For example, we extraction content website [https://tiki.vn/muong-xao-dandihome](https://tiki.vn/muong-xao-dandihome-inox-304-ket-hop-be-mat-muong-silicon-cao-cap-chiu-duoc-nhiet-do-cao-an-toan-voi-chao-chong-dinh-p68607055.html) <br /><br />
+
+
+For example, we extraction content website [https://tiki.vn/muong-xao-dandihome](https://tiki.vn/muong-xao-dandihome-inox-304-ket-hop-be-mat-muong-silicon-cao-cap-chiu-duoc-nhiet-do-cao-an-toan-voi-chao-chong-dinh-p68607055.html)
+
 ![](images/tiki.png)
-<br /><br />
+
+
+
 **and here is my result** : 
 ```
 Muỗng xào đa năng DandiHome sử dụng chất liệu Inox 304 để làm cán và lõi bên trong.
